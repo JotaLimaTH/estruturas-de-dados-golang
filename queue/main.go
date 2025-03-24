@@ -8,6 +8,10 @@ func main(){
 	fila.Append(3)
 	fmt.Println(fila.First.Data)
 	fmt.Println(fila.First.Next.Data)
+	fila.Remove()
+	fmt.Println(fila.First.Data)
+	fila.Remove()
+	fmt.Println(fila)
 }
 
 type Node struct {
@@ -36,4 +40,8 @@ func (q *Queue) Append(elem int){
 	}
 	current.Next = newNode
 	q.Size++
+}
+func (q *Queue) Remove(){
+	q.First = q.First.Next
+	q.Size --
 }
