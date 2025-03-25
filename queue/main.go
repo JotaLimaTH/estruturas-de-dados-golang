@@ -32,6 +32,7 @@ func (q *Queue) Append(elem int){
 	newNode := &Node{Data: elem, Next: nil}
 	if q.First == nil {
 		q.First = newNode
+		q.Size = 1
 		return
 	}
 	current := q.First
