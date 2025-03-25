@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main(){
-	fila := newQueue(5)
+	fila := NewQueue(5)
 	fmt.Println(fila)
 	fila.Append(3)
 	fmt.Println(fila.First.Data)
@@ -22,7 +22,7 @@ type Queue struct {
 	First *Node
 	Size  int
 }
-func newQueue(firstElem int) Queue{
+func NewQueue(firstElem int) Queue{
 	return Queue{
 		First: &Node{Data: firstElem, Next: nil},
 		Size: 1,
