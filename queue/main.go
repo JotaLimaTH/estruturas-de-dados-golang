@@ -4,14 +4,11 @@ import "fmt"
 
 func main(){
 	fila := NewQueue(5)
-	fmt.Println(fila)
 	fila.Append(3)
-	fmt.Println(fila.First.Data)
-	fmt.Println(fila.First.Next.Data)
-	fila.Remove()
-	fmt.Println(fila.First.Data)
-	fila.Remove()
-	fmt.Println(fila)
+	fila.Append(1)
+	fila.Append(120)
+	fila.Append(-321)
+	fila.PrintQueue()
 }
 
 type Node struct {
@@ -45,4 +42,11 @@ func (q *Queue) Append(elem int){
 func (q *Queue) Remove(){
 	q.First = q.First.Next
 	q.Size --
+}
+func (q *Queue) PrintQueue(){
+	current := q.First
+	for current != nil {
+		fmt.Println(current.Data)
+		current = current.Next
+	}
 }
