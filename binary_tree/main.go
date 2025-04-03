@@ -82,3 +82,12 @@ func (b *BinaryTree) PostOrderTraversal(root *Node) []int {
 
 	return result
 }
+func (b *BinaryTree) Search(root *Node, key int) Node{
+	if root == nil || key == root.Data {
+		return *root
+	}
+	if key < root.Data {
+		return b.Search(root.Left, key)
+	}
+	return b.Search(root.Right, key)
+}
