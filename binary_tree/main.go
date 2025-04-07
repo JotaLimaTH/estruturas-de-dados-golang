@@ -136,3 +136,21 @@ func (b *BinaryTree) FindMin(root *Node) *Node {
 	}
 	return root
 }
+func (b *BinaryTree) GetHeight(root *Node) int {
+ 	leftHeight := 1
+	rightHeight := 1
+	pointerLeft := root
+	pointerRight := root
+	for pointerLeft.Left != nil {
+		leftHeight ++
+		pointerLeft = pointerLeft.Left
+	}
+	for pointerRight.Right != nil {
+		rightHeight ++
+		pointerRight = pointerLeft.Right
+	}
+	if leftHeight > rightHeight {
+		return leftHeight
+	}
+	return rightHeight
+}
