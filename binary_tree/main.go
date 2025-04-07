@@ -8,9 +8,16 @@ func main() {
 	binaryTree.Insert(2, &binaryTree.Root)
 	binaryTree.Insert(7, &binaryTree.Root)
 	binaryTree.Insert(4, &binaryTree.Root)
+	binaryTree.Insert(20, &binaryTree.Root)
+	binaryTree.Insert(15, &binaryTree.Root)
+	binaryTree.Insert(28, &binaryTree.Root)
 	fmt.Println(binaryTree.Root.Data, binaryTree.Root.Left.Data, binaryTree.Root.Right.Data)
 	fmt.Println("In Order Traversal: ", binaryTree.InOrderTraversal(binaryTree.Root))
 	fmt.Println("Pre Order Traversal: ", binaryTree.PreOrderTraversal(binaryTree.Root))
+	fmt.Println("Post Order Traversal: ", binaryTree.PostOrderTraversal(binaryTree.Root))
+	binaryTree.Delete(binaryTree.Root, 2)
+	fmt.Println("Post Order Traversal: ", binaryTree.PostOrderTraversal(binaryTree.Root))
+	binaryTree.Delete(binaryTree.Root, 20)
 	fmt.Println("Post Order Traversal: ", binaryTree.PostOrderTraversal(binaryTree.Root))
 }
 
@@ -90,4 +97,42 @@ func (b *BinaryTree) Search(root *Node, key int) Node{
 		return b.Search(root.Left, key)
 	}
 	return b.Search(root.Right, key)
+}
+func (b *BinaryTree) Delete(root *Node, key int) *Node{
+	if root == nil {
+		return root
+	}
+
+	if key < root.Data {
+		root.Left = b.Delete(root.Left, key)
+	} else if key > root.Data {
+		root.Right = b.Delete(root.Right, key)
+	} else {
+		// Deleção de folha
+		if root.Left == nil && root.Right == nil {
+			return nil
+		}
+
+		// Deleção de node com só um filho
+		if root.Left == nil && root.Right != nil {
+			return root.Right
+		}
+		if root.Right == nil && root.Left != nil {
+			return root.Left
+		}
+
+		if root.Left != nil && root.Right != nil {
+			minNode := b.FindMin(root.Right)
+			root.Data = minNode.Data
+			root.Right = b.Delete(root.Right, minNode.Data)
+		}
+	}
+
+	return root
+}
+func (b *BinaryTree) FindMin(root *Node) *Node {
+	for root.Left != nil {
+		root = root.Left
+	}
+	return root
 }
